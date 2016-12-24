@@ -22,7 +22,7 @@ try:
         print('No entries found!')
         exit(1)
 
-    print()
+    print(str(len(entries)) + ' entries found!')
     for i in entries:
         for m in i.mail.values:
             print(m + '\t' + i.cn[0] + '\t' + i.entry_dn)
