@@ -15,9 +15,8 @@ try:
     entries = []
     for d in LDAPDIRS:
         with ldap3.Connection(d[0], auto_bind=True) as conn:
-            print(d[0] + ' … ', end='', flush=True)
-            flt = '(&' + FILTER + \
-                '(|(mail=' + argv[1] + '*)(cn=' + argv[1] + '*)))'
+            print(''.join((d[0], ' … ')), end='', flush=True)
+            flt = '(&{0}(|(mail={1}*)(cn={1}*)))'.format(FILTER, argv[1])
             conn.search(d[1], flt, attributes=ATTRS)
             entries.extend(conn.entries)
 
@@ -25,11 +24,11 @@ try:
         print('No entries found!')
         exit(1)
 
-    print(str(len(entries)) + ' entries found!')
+    print('{:d} entries found!'.format(len(entries)))
     for i in entries:
         for m in i.mail.values:
-            print(m + '\t' + i.cn[0] + '\t' + i.entry_dn)
+            print('{}\t{}\t{}'.format(m, i.cn[0], i.entry_dn))
 
 except Exception as e:
-    print("Error: " + type(e).__name__ + ": " + str(e))
+    print('Error: {}: {}'.format(type(e).__name__, e))
     exit(1)
