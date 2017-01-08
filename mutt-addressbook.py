@@ -16,7 +16,7 @@ try:
     for d in LDAPDIRS:
         with ldap3.Connection(d[0], auto_bind=True) as conn:
             print(''.join((d[0], ' … ')), end='', flush=True)
-            flt = '(&{0}(|(mail={1}*)(cn={1}*)))'.format(FILTER, argv[1])
+            flt = '(&{0}(|(mail={1}*)(cn={1}*)(sn={1}*)(givenName={1}*)))'.format(FILTER, argv[1])
             conn.search(d[1], flt, attributes=ATTRS)
             entries.extend(conn.entries)
 
