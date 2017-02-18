@@ -1,13 +1,20 @@
 #!/usr/bin/env python3
 
 try:
-    from sys import argv
+    import argparse
     import configparser
     import os
     import ldap3
 
+    p = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+    p.add_argument('searchterm', help='Term to search for')
+    p.add_argument('-C', '--configfile', dest='configfile',
+                   default='~/.mutt-addressbook.ini',
+                   help='Configuration file to read')
+    args = p.parse_args()
+
     config = configparser.ConfigParser()
-    config.read(['config.ini', os.path.expanduser('~/.mutt-addressbook.ini')])
+    config.read(['config.ini', os.path.expanduser(args.configfile)])
 
     FILTER = '(mail=*)'
     ATTRS = ['cn', 'mail']
@@ -19,7 +26,7 @@ try:
             continue
         with ldap3.Connection(config[d]['URI'], auto_bind=True) as conn:
             print(''.join((d, ' … ')), end='', flush=True)
-            flt = '(&{0}(|(mail={1}*)(cn={1}*)(sn={1}*)(givenName={1}*)))'.format(FILTER, argv[1])
+            flt = '(&{0}(|(mail={1}*)(cn={1}*)(sn={1}*)(givenName={1}*)))'.format(FILTER, args.searchterm)
             conn.search(config[d]['Base'], flt, attributes=ATTRS)
             entries.extend(conn.entries)
 
