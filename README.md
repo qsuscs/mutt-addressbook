@@ -5,5 +5,5 @@ query exactly one LDAP server, but it is intended to be capable of more once
 I’m done.
 
 ## Config
-Put next to the script as `config.ini` or at `~/.mutt-addressbook.ini`.  Be
-inspired by `config.sample.ini`.
+Put at `./config.ini` or at `~/.mutt-addressbook.ini`.  Be inspired by
+`config.sample.ini`.
