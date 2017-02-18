@@ -8,7 +8,7 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
 
 setup(
     name="mutt-addressbook",
-    version="1.0.0",
+    version="1.0.1",
 
     scripts=['mutt-addressbook.py'],
 
