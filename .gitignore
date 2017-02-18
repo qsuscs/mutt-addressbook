@@ -1,3 +1,5 @@
+config.ini
+
 # Ignore patterns for Python
 # Byte-compiled / optimized / DLL files
 __pycache__/
