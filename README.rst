@@ -7,5 +7,5 @@ query LDAP directories, but it is intended to be capable of more once I’m done
 
 Config
 ------
-Put at `./config.ini` or at `~/.mutt-addressbook.ini`.  Be inspired by
-`config.sample.ini`.
+Put at `./config.ini` or at `~/.mutt-addressbook.ini` or specify with `-C
+$config`.  Be inspired by `config.sample.ini`.
